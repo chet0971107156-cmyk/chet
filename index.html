@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="xx">Weight (kg):</label>
+    <input id="xx" type="text">
+    <label for="yy">Height (cm):</label>
+    <input id="yy" type="text">
+    <button onclick="gg()">Submit </button>
+    <p id="result">Your BMI:</p>
+    <script>
+        function gg() {
+            let x = document.getElementById("xx").value;
+            let y = document.getElementById("yy").value;
+            fetch("http://localhost:3000?w=" + x + "&h=" + y)
+                .then((res) => res.json())
+                .then((d) => {
+                    document.getElementById("result").innerHTML = d.error || d.bmi + " (" + d.result + ")"
+                })
+    }
+</script>
+</body>
+</html>
