@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="xx">Number 1:</label>
+    <input id="xx" type="number">
+    <label for="yy">Number 2:</label>
+    <input id="yy" type="number">
+    <br>
+    <button onclick="plus()">+</button>
+    <button onclick="minus()">-</button>
+    <button onclick="multiply()">*</button>
+    <button onclick="divide()">/</button>
+    <p id="result">Result:</p>
+    <script>
+        function cal(x) {
+            let xx = document.getElementById("xx").value;
+            let yy = document.getElementById("yy").value;
+            fetch(`http://localhost:3000/${x}?a=${xx}&b=${yy}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById("result").innerText = "Error: " + data.error;
+                    } else {
+                        document.getElementById("result").innerText = "Result: " + data.result;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById("result").innerText = "Error: " + error.message;
+                });
+                }
+
+        function plus() { cal("plus"); }
+        function minus() { cal("minus"); }
+        function multiply() { cal("multiply"); }
+        function divide() { cal("divide"); }
+    </script>
+
+
+</body>
+</html>
