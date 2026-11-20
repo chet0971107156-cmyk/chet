@@ -18,8 +18,8 @@
             let y = document.getElementById("yy").value;
             fetch("http://localhost:3000?w=" + x + "&h=" + y)
                 .then((res) => res.json())
-                .then((d) => {
-                    document.getElementById("result").innerHTML = d.error || d.bmi + " (" + d.result + ")"
+                .then((data) => {
+                    document.getElementById("result").innerHTML = data.error || data.bmi + " (" + data.result + ")"
                 })
     }
 </script>
